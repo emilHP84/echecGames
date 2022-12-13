@@ -11,8 +11,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/86acb61e0d2b4b36bc20af11093be9a5157e00/c7/bab87620/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Empire.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Pièce D'échec/Tours.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/PieceEchec/Cavalier.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -32,6 +33,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -73,7 +75,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670331277815</updated>
-      <workItem from="1670331284571" duration="5985000" />
+      <workItem from="1670331284571" duration="6091000" />
+      <workItem from="1670398024849" duration="11249000" />
+      <workItem from="1670484245188" duration="10183000" />
+      <workItem from="1670502769926" duration="8553000" />
+      <workItem from="1670570577630" duration="8293000" />
+      <workItem from="1670916663501" duration="17911000" />
     </task>
     <servers />
   </component>
@@ -84,5 +91,37 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/PieceEchec/Cavalier.cs</url>
+          <line>7</line>
+          <properties documentPath="C:\Users\E.hugly\Desktop\Local Change\echecGames\Assets\Script\PieceEchec\Cavalier.cs" initialLine="15" containingFunctionPresentation="method 'MovePossible'">
+            <startOffsets>
+              <option value="205" />
+            </startOffsets>
+            <endOffsets>
+              <option value="206" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/Manager.cs</url>
+          <line>16</line>
+          <properties documentPath="C:\Users\E.hugly\Desktop\Local Change\echecGames\Assets\Script\Manager.cs" initialLine="11" containingFunctionPresentation="method 'Start'">
+            <startOffsets>
+              <option value="504" />
+            </startOffsets>
+            <endOffsets>
+              <option value="505" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
