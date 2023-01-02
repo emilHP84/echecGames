@@ -5,6 +5,11 @@ using UnityEngine;
 public class Reine : Piece {
     public Reine(Empire empire) : base(empire) { }
     
+    public void Start() {
+        HeuristicValue = 10;
+        PositionValue = 0;
+    }
+    
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
         // Right Moves

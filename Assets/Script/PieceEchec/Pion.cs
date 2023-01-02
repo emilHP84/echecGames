@@ -7,12 +7,13 @@ public class Pion : Piece {
   private bool hasMoved;
 
   public void Start() {
+    HeuristicValue = 1;
+    PositionValue = 0;
     hasMoved = false;
   }
 
   public override List<Vector2Int> MovePossible() {
    List<Vector2Int> possibleMoves = new List<Vector2Int>();
-   
    // Top Moves
    possibleMoves.AddRange(PionTopMoves);
    // Top Mega Moves
@@ -21,7 +22,6 @@ public class Pion : Piece {
    possibleMoves.AddRange(PionTopRightMoves);
    // Top left Moves
    possibleMoves.AddRange(PionTopLeftMoves);
-
    
    return possibleMoves;
  }
@@ -37,6 +37,7 @@ public class Pion : Piece {
           if (otherPiece.Empire == Empire) {
             return possibleMoves;
           }
+          CanEat = true;
           possibleMoves.Add(coord);
           return possibleMoves;
         }
@@ -55,6 +56,7 @@ public class Pion : Piece {
        if (otherPiece.Empire == Empire) {
          return possibleMoves;
        }
+       CanEat = true;
        possibleMoves.Add(coord);
        return possibleMoves;
      }
@@ -63,36 +65,46 @@ public class Pion : Piece {
    }
  }
  protected List<Vector2Int> PionTopRightMoves {
-   get {
+   get
+   {
      List<Vector2Int> possibleMoves = new List<Vector2Int>();
-     Vector2Int coord = new Vector2Int(Coordonee.x+1, Coordonee.y+1); 
-     // Existing piece on current coord
-     Piece otherPiece = Board.GetPiece(coord);
-     if (otherPiece != null) {
-       if (otherPiece.Empire == Empire) {
+     if (CanEat == true) {
+       Vector2Int coord = new Vector2Int(Coordonee.x + 1, Coordonee.y + 1);
+       // Existing piece on current coord
+       Piece otherPiece = Board.GetPiece(coord);
+       if (otherPiece != null)
+       {
+         if (otherPiece.Empire == Empire)
+         {
+           return possibleMoves;
+         }
+         possibleMoves.Add(coord);
          return possibleMoves;
        }
        possibleMoves.Add(coord);
-       return possibleMoves;
      }
-     possibleMoves.Add(coord);
      return possibleMoves;
    }
  }
  protected List<Vector2Int> PionTopLeftMoves {
-   get {
+   get
+   {
      List<Vector2Int> possibleMoves = new List<Vector2Int>();
-     Vector2Int coord = new Vector2Int(Coordonee.x-1, Coordonee.y+1); 
-     // Existing piece on current coord
-     Piece otherPiece = Board.GetPiece(coord);
-     if (otherPiece != null) {
-       if (otherPiece.Empire == Empire) {
+     if (CanEat == true) {
+       Vector2Int coord = new Vector2Int(Coordonee.x - 1, Coordonee.y + 1);
+       // Existing piece on current coord
+       Piece otherPiece = Board.GetPiece(coord);
+       if (otherPiece != null)
+       {
+         if (otherPiece.Empire == Empire)
+         {
+           return possibleMoves;
+         }
+         possibleMoves.Add(coord);
          return possibleMoves;
        }
        possibleMoves.Add(coord);
-       return possibleMoves;
      }
-     possibleMoves.Add(coord);
      return possibleMoves;
    }
  }

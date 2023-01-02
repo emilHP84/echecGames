@@ -1,12 +1,19 @@
-using System;
 using System.Collections.Generic;
 using Script;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tour : Piece {
-    
-    public List<Action> moveTour = new List<Action>();
     public Tour(Empire empire) : base(empire) { }
+    
+    public void Start() {
+        HeuristicValue = 4;
+        PositionValue = 0;
+        Debug.Log("test");
+    }
+
+    
+    
 
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();

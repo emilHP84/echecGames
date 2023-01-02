@@ -5,6 +5,11 @@ using UnityEngine;
 public class Roi : Piece {
    public Roi(Empire empire) : base(empire) { }
    
+   public void Start() {
+      HeuristicValue = 100;
+      PositionValue = 0;
+   }
+   
    public override List<Vector2Int> MovePossible() {
      List<Vector2Int> possibleMoves = new List<Vector2Int>();
      // Top Moves
@@ -26,7 +31,6 @@ public class Roi : Piece {
      
      return possibleMoves; 
    }
-   
    protected List<Vector2Int> KingTopMoves {
      get {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
@@ -37,6 +41,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -54,6 +59,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -71,6 +77,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -88,6 +95,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -105,6 +113,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -122,6 +131,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -139,6 +149,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }
@@ -156,6 +167,7 @@ public class Roi : Piece {
            if (otherPiece.Empire == Empire) {
               return possibleMoves;
            }
+           CanEat = true;
            possibleMoves.Add(coord);
            return possibleMoves;
         }

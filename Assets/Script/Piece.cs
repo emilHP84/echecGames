@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using Script;
 using UnityEngine;
 
@@ -6,9 +7,16 @@ public abstract class Piece {
     
     [Header("valeur unitée:")]
     public int HeuristicValue;
+    public int PositionValue;
+
+    public int xValue;
+    public int yValue;
+    
+    public bool CanEat;
     
     [Header("équipe:")]
     public Empire Empire;
+    
 
     public Board Board => Manager.Board;
     public Vector2Int Coordonee => Board.CoordinateOf(this);
@@ -22,6 +30,7 @@ public abstract class Piece {
     protected Vector2Int BottomLeftCoord => Coordonee + new Vector2Int(-1, -1);
     protected Vector2Int TopLeftCoord => Coordonee + new Vector2Int(-1, 1);
     
+    
     protected List<Vector2Int> TopMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
@@ -33,6 +42,7 @@ public abstract class Piece {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
+                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -52,6 +62,7 @@ public abstract class Piece {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
+                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -71,6 +82,7 @@ public abstract class Piece {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
+                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -90,6 +102,7 @@ public abstract class Piece {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
+                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -110,6 +123,7 @@ public abstract class Piece {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
+                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
@@ -131,6 +145,7 @@ public abstract class Piece {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
+                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
@@ -152,6 +167,7 @@ public abstract class Piece {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
+                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
@@ -173,6 +189,7 @@ public abstract class Piece {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
+                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
