@@ -9,7 +9,6 @@ public class Tour : Piece {
     public void Start() {
         HeuristicValue = 4;
         PositionValue = 0;
-        Debug.Log("test");
     }
 
     

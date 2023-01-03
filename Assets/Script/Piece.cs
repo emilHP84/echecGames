@@ -9,10 +9,11 @@ public abstract class Piece {
     public int HeuristicValue;
     public int PositionValue;
 
-    public int xValue;
-    public int yValue;
+    public int XValue;
+    public int YValue;
     
     public bool CanEat;
+    public bool CanWasEat;
     
     [Header("équipe:")]
     public Empire Empire;
