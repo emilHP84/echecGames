@@ -3,11 +3,8 @@ using Script;
 using UnityEngine;
 
 public class Reine : Piece {
-    public Reine(Empire empire) : base(empire) { }
-    
-    public void Start() {
-        HeuristicValue = 10;
-        PositionValue = 0;
+    public Reine(Empire empire, int heuristic) : base(empire) {
+        HeuristicValue = heuristic;
     }
     
     public override List<Vector2Int> MovePossible() {

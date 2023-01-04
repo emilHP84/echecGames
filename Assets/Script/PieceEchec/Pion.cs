@@ -3,12 +3,13 @@ using Script;
 using UnityEngine;
 
 public class Pion : Piece {
-  public Pion(Empire empire) : base(empire) { }
+  public Pion(Empire empire, int heuristic) : base(empire) {
+    HeuristicValue = heuristic;
+    
+  }
   private bool hasMoved;
 
   public void Start() {
-    HeuristicValue = 1;
-    PositionValue = 0;
     hasMoved = false;
   }
 

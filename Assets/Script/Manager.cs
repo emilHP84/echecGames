@@ -9,8 +9,12 @@ using System.Collections.Generic;
 //https://www.developpez.net/forums/d1014691/general-developpement/algorithme-mathematiques/intelligence-artificielle/fonction-d-evaluation-minmax-aux-echecs/
 //https://forums.commentcamarche.net/forum/affich-20210445-fonction-d-evaluation-de-minmax
 //https://openclassrooms.com/forum/sujet/fonction-evaluation-echec-72339
-public class Manager : MonoBehaviour
-{
+
+//https://pageperso.lis-lab.fr/~liva.ralaivola/teachings20062005/reversi/MinMaxL2.pdf
+public class Manager : MonoBehaviour {
+    
+    public EvaluationFunction eval => EvaluationFunction.Function;
+    
     public Transform BoardTransform;
     public Transform PieceTransform;
     public GameObject SquarePrefab;
@@ -25,23 +29,28 @@ public class Manager : MonoBehaviour
         SquarePrefab.GetComponent<Image>().sprite = null;
         GenerateBoard();
         DisplayBoard(); 
+        EvaluationFunction.Function.Evaluation();
+    }
+
+    public void Update() {
+        Debug.Log("test: " + eval.RookB);
     }
 
     private void GenerateBoard() {
         Board.Pieces = new Piece[,] {
-            { new Tour(Empire.Black), new Cavalier(Empire.Black), new Fou(Empire.Black), new Reine(Empire.Black), new Roi(Empire.Black), new Fou(Empire.Black), new Cavalier(Empire.Black), new Tour(Empire.Black) },
-            { new Pion(Empire.Black), new Pion(Empire.Black), new Pion(Empire.Black), new Pion(Empire.Black), new Pion(Empire.Black), new Pion(Empire.Black), new Pion(Empire.Black), new Pion(Empire.Black) },
+            { new Tour(Empire.Black,4), new Cavalier(Empire.Black,5), new Fou(Empire.Black,4), new Reine(Empire.Black,10), new Roi(Empire.Black,100), new Fou(Empire.Black,4), new Cavalier(Empire.Black,5), new Tour(Empire.Black,4) },
+            { new Pion(Empire.Black,1), new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),},
             { null, null, null, null, null, null, null, null,  },
             { null, null, null, null, null, null, null, null,  },
             { null, null, null, null, null, null, null, null,  },
             { null, null, null, null, null, null, null, null,  },
-            { new Pion(Empire.White), new Pion(Empire.White), new Pion(Empire.White), new Pion(Empire.White), new Pion(Empire.White), new Pion(Empire.White), new Pion(Empire.White), new Pion(Empire.White) },
-            { new Tour(Empire.White), new Cavalier(Empire.White), new Fou(Empire.White), new Reine(Empire.White), new Roi(Empire.White), new Fou(Empire.White), new Cavalier(Empire.White), new Tour(Empire.White) },
+            { new Pion(Empire.White,1), new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),},
+            { new Tour(Empire.White,4), new Cavalier(Empire.White,5), new Fou(Empire.White,4), new Reine(Empire.White,10), new Roi(Empire.White,100), new Fou(Empire.White,4), new Cavalier(Empire.White,5), new Tour(Empire.White,4) },
         };
     }
     
-    
-   
+
+
     public void DisplayBoard() {
         //création board
         for (int x = 0; x < 8; x++) {

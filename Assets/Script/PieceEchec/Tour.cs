@@ -4,16 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tour : Piece {
-    public Tour(Empire empire) : base(empire) { }
-    
-    public void Start() {
-        HeuristicValue = 4;
-        PositionValue = 0;
+    public Tour(Empire empire, int heuristic) : base(empire) {
+        HeuristicValue = heuristic;
+        
     }
-
     
-    
-
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
         // Right Moves

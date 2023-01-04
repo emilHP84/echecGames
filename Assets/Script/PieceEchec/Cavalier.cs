@@ -3,13 +3,11 @@ using Script;
 using UnityEngine;
 
 public class Cavalier : Piece {
-   public Cavalier(Empire empire) : base(empire) { }
-   
-   public void Start() {
-      HeuristicValue = 5;
-      PositionValue = 0;
+   public Cavalier(Empire empire, int heuristic) : base(empire) {
+      HeuristicValue = heuristic;
+      
    }
-
+   
    public override List<Vector2Int> MovePossible() {
       List<Vector2Int> possibleMoves = new List<Vector2Int>();
       // Top left Moves

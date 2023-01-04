@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Board {
    
+   public static Board instanceBoard = new Board();
    [SerializeField] public Piece[,] Pieces = new Piece[8, 8];
    
    public Piece GetPiece(Vector2Int coordonee) {
