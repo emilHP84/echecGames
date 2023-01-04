@@ -7,6 +7,7 @@ using UnityEngine;
 public class EvaluationFunction : MonoBehaviour {
 
     public Board Board => Board.instanceBoard;
+        
     public static EvaluationFunction Function;
     
     [SerializeField] public Piece KnightB = new Cavalier(Empire.Black, 5);
@@ -43,24 +44,24 @@ public class EvaluationFunction : MonoBehaviour {
         RookB.HeuristicValue = 0;
     }
     public void Evaluation() {
-        KnightB = Board.Pieces[0, 1];
-         RookB = Board.Pieces[0, 0];
-    }
-    public void Update() {
-        EvaluationRookB();
-        EvaluationKingB();
-        EvaluationBishopB();
-        EvaluationKnightB();
-        EvaluationQueenB();
-        EvaluationPawnB();
+        //KnightB = Board.Pieces[0, 1];
+        //RookB = Board.Pieces[0, 0];
+         
+         EvaluationRookB();
+         EvaluationKingB();
+         EvaluationBishopB();
+         EvaluationKnightB();
+         EvaluationQueenB();
+         EvaluationPawnB();
         
-        EvaluationRookW();
-        EvaluationKingW();
-        EvaluationBishopW();
-        EvaluationKnightW();
-        EvaluationQueenW();
-        EvaluationPawnW();
+         EvaluationRookW();
+         EvaluationKingW();
+         EvaluationBishopW();
+         EvaluationKnightW();
+         EvaluationQueenW();
+         EvaluationPawnW();
     }
+    
     
 
 
