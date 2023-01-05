@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 //https://fr.wikipedia.org/wiki/Algorithme_minimax
 //https://fr.wikipedia.org/wiki/%C3%89lagage_alpha-b%C3%AAta
@@ -11,9 +12,8 @@ using System.Collections.Generic;
 //https://openclassrooms.com/forum/sujet/fonction-evaluation-echec-72339
 
 //https://pageperso.lis-lab.fr/~liva.ralaivola/teachings20062005/reversi/MinMaxL2.pdf
+
 public class Manager : MonoBehaviour {
-    
-    public EvaluationFunction eval => EvaluationFunction.Function;
     
     public Transform BoardTransform;
     public Transform PieceTransform;
@@ -28,29 +28,27 @@ public class Manager : MonoBehaviour {
     public void Start() {
         SquarePrefab.GetComponent<Image>().sprite = null;
         GenerateBoard();
-        DisplayBoard(); 
-        EvaluationFunction.Function.Evaluation();
-    }
-
-    public void Update() {
-        Debug.Log("test: " + eval.RookB);
+        DisplayBoard();
+        Board.HeuristicSum(Empire.Black);
+        Board.HeuristicSum(Empire.White);
+        /*if (List<Vector2Int>GetChilds()){
+            MinMax(Board, 2, false);
+        }*/
     }
 
     private void GenerateBoard() {
         Board.Pieces = new Piece[,] {
-            { new Tour(Empire.Black,4), new Cavalier(Empire.Black,5), new Fou(Empire.Black,4), new Reine(Empire.Black,10), new Roi(Empire.Black,100), new Fou(Empire.Black,4), new Cavalier(Empire.Black,5), new Tour(Empire.Black,4) },
+            { new Tour(Empire.Black,5), new Cavalier(Empire.Black,3), new Fou(Empire.Black,5), new Reine(Empire.Black,10), new Roi(Empire.Black,2000), new Fou(Empire.Black,5), new Cavalier(Empire.Black,3), new Tour(Empire.Black,5) },
             { new Pion(Empire.Black,1), new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),new Pion(Empire.Black,1),},
             { null, null, null, null, null, null, null, null,  },
             { null, null, null, null, null, null, null, null,  },
             { null, null, null, null, null, null, null, null,  },
             { null, null, null, null, null, null, null, null,  },
             { new Pion(Empire.White,1), new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),new Pion(Empire.White,1),},
-            { new Tour(Empire.White,4), new Cavalier(Empire.White,5), new Fou(Empire.White,4), new Reine(Empire.White,10), new Roi(Empire.White,100), new Fou(Empire.White,4), new Cavalier(Empire.White,5), new Tour(Empire.White,4) },
+            { new Tour(Empire.White,5), new Cavalier(Empire.White,3), new Fou(Empire.White,5), new Reine(Empire.White,10), new Roi(Empire.White,2000), new Fou(Empire.White,5), new Cavalier(Empire.White,3), new Tour(Empire.White,5) },
         };
     }
     
-
-
     public void DisplayBoard() {
         //création board
         for (int x = 0; x < 8; x++) {
@@ -70,6 +68,44 @@ public class Manager : MonoBehaviour {
         }
     }
     
+    public void Think(Board board,int depth,Empire empire, bool maximizingPlayer) {
+        int oldValue = 0;
+        int value = 0;
+        if (maximizingPlayer) {
+            oldValue = int.MinValue;
+            oldValue = Mathf.Max(oldValue,MinMax(board, depth - 1,false, 
+                empire == Empire.White ? Empire.Black : Empire.White));
+        }
+        if (oldValue > value) {
+            value = oldValue;
+        }
+    }
+    
+    // Pour chaque board possible je lance minmax
+
+    public int MinMax(Board board, int depth, bool maximizingPlayer, Empire currentEmpire) { 
+        int value = 0;
+        if (depth == 0 ) {
+            return board.HeuristicSum(currentEmpire);
+        }
+        if (maximizingPlayer) {
+            value = int.MinValue;
+            foreach (var child in Board.GetChilds()) {
+                value = Mathf.Max(value, MinMax(child, depth - 1, false, 
+                    currentEmpire == Empire.White ? Empire.Black : Empire.White));
+            }
+        }
+        else {
+            value = int.MaxValue;
+            foreach (var child in Board.GetChilds()) {
+                value = Mathf.Min(value, MinMax(child, depth - 1, true, 
+                    currentEmpire == Empire.White ? Empire.Black : Empire.White));
+
+            }
+        }
+        return value;
+    }
+
     private Sprite GetSprite(Piece piece) {
         
         if(piece == null) return Empty;

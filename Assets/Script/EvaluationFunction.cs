@@ -6,24 +6,10 @@ using UnityEngine;
 
 public class EvaluationFunction : MonoBehaviour {
 
-    public Board Board => Board.instanceBoard;
+    /*public Board Board => Board.instanceBoard;
         
     public static EvaluationFunction Function;
     
-    [SerializeField] public Piece KnightB = new Cavalier(Empire.Black, 5);
-    [SerializeField] public Piece RookB = new Tour(Empire.Black,4);
-    [SerializeField] public Piece BishopB = new Fou(Empire.Black,4);
-    [SerializeField] public Piece KingB = new Roi(Empire.Black,100);
-    [SerializeField] public Piece QueenB = new Reine(Empire.Black,10);
-    [SerializeField] public Piece PawnB = new Pion(Empire.Black,1);
-    
-
-    [SerializeField] public Piece KnightW = new Cavalier(Empire.White,5);
-    [SerializeField] public Piece RookW = new Tour(Empire.White,4);
-    [SerializeField] public Piece BishopW = new Fou(Empire.White,4);
-    [SerializeField] public Piece KingW = new Roi(Empire.White,100);
-    [SerializeField] public Piece QueenW = new Reine(Empire.White,10);
-    [SerializeField] public Piece PawnW = new Pion(Empire.White,1);
     
     public Vector2Int CoordKnightB => Board.CoordinateOf(KnightB);
     public Vector2Int CoordRookB => Board.CoordinateOf(RookB);
@@ -61,10 +47,6 @@ public class EvaluationFunction : MonoBehaviour {
          EvaluationQueenW();
          EvaluationPawnW();
     }
-    
-    
-
-
     public void EvaluationRookB() {
         Vector2Int coordRight = new Vector2Int(CoordRookB.x + 1, CoordRookB.y);
         Piece otherPieceRight = Board.GetPiece(coordRight);
@@ -696,6 +678,6 @@ public class EvaluationFunction : MonoBehaviour {
             }
         }
         
-    } 
+    } */
     
 }
