@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using Script;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tour : Piece {
-    public Tour(Empire empire, int heuristic) : base(empire) {
+    public Tour(Empire empire, int heuristic, int position) : base(empire) {
         HeuristicValue = heuristic;
-        
+        PositionValue = position;
     }
     
     public override List<Vector2Int> MovePossible() {

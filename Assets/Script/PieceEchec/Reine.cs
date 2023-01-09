@@ -3,8 +3,9 @@ using Script;
 using UnityEngine;
 
 public class Reine : Piece {
-    public Reine(Empire empire, int heuristic) : base(empire) {
+    public Reine(Empire empire, int heuristic, int position) : base(empire) {
         HeuristicValue = heuristic;
+        PositionValue = position;
     }
     
     public override List<Vector2Int> MovePossible() {

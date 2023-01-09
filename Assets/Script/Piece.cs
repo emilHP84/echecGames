@@ -12,38 +12,38 @@ public abstract class Piece {
     public int XValue;
     public int YValue;
     
-    public bool CanEat;
     public bool CanWasEat;
     
     [Header("équipe:")]
     public Empire Empire;
     
 
-    public Board Board => Manager.Board;
-    public Vector2Int Coordonee => Board.CoordinateOf(this);
-    
-    protected Vector2Int TopCoord => Coordonee + new Vector2Int(0,1 );
-    protected Vector2Int RightCoord => Coordonee + new Vector2Int(1, 0);
-    protected Vector2Int BottomCoord => Coordonee + new Vector2Int(0, -1);
-    protected Vector2Int LeftCoord => Coordonee + new Vector2Int(-1, 0);
-    protected Vector2Int TopRightCoord => Coordonee + new Vector2Int(1,1 );
-    protected Vector2Int BottomRightCoord => Coordonee + new Vector2Int(1, -1);
-    protected Vector2Int BottomLeftCoord => Coordonee + new Vector2Int(-1, -1);
-    protected Vector2Int TopLeftCoord => Coordonee + new Vector2Int(-1, 1);
-    
+    public Board CurrentBoard => Manager.CurrentBoard;
+    public Vector2Int Coordonee => CurrentBoard.CoordinateOf(this);
+
+    protected Vector2Int Top => new Vector2Int(-1, 0);
+    protected Vector2Int TopCoord => Coordonee + Top;
+    protected Vector2Int TopTopCoord => Coordonee + new Vector2Int(-2, 0);
+    protected Vector2Int RightCoord => Coordonee + new Vector2Int(0, 1);
+    protected Vector2Int BottomCoord => Coordonee + new Vector2Int(1, 0);
+    protected Vector2Int BottomBottomCoord => Coordonee + new Vector2Int(2, 0);
+    protected Vector2Int LeftCoord => Coordonee + new Vector2Int(0, -1);
+    protected Vector2Int TopRightCoord => Coordonee + new Vector2Int(-1, 1);
+    protected Vector2Int BottomRightCoord => Coordonee + new Vector2Int(1, 1);
+    protected Vector2Int BottomLeftCoord => Coordonee + new Vector2Int(1, -1);
+    protected Vector2Int TopLeftCoord => Coordonee + new Vector2Int(-1, -1);
     
     protected List<Vector2Int> TopMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.y+1; i <= 8; i++) {
+            for (int i = Coordonee.y+1; i <= 7; i++) {
                 Vector2Int coord = new Vector2Int(Coordonee.x, i);
                 // Existing piece on current coord
-                Piece otherPiece = Board.GetPiece(coord);
+                Piece otherPiece = CurrentBoard.GetPiece(coord);
                 if (otherPiece != null) {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
-                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -55,15 +55,14 @@ public abstract class Piece {
     protected List<Vector2Int> RightMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 8; i++) {
+            for (int i = Coordonee.x+1; i <= 7; i++) {
                 Vector2Int coord = new Vector2Int(i, Coordonee.y);
                 // Existing piece on current coord
-                Piece otherPiece = Board.GetPiece(coord);
+                Piece otherPiece = CurrentBoard.GetPiece(coord);
                 if (otherPiece != null) {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
-                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -78,12 +77,11 @@ public abstract class Piece {
             for (int i = Coordonee.y-1; i >= 0; i--) {
                 Vector2Int coord = new Vector2Int(Coordonee.x,i);
                 // Existing piece on current coord
-                Piece otherPiece = Board.GetPiece(coord);
+                Piece otherPiece = CurrentBoard.GetPiece(coord);
                 if (otherPiece != null) {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
-                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -98,12 +96,11 @@ public abstract class Piece {
             for (int i = Coordonee.x-1; i >= 0; i--) {
                 Vector2Int coord = new Vector2Int(i, Coordonee.y);
                 // Existing piece on current coord
-                Piece otherPiece = Board.GetPiece(coord);
+                Piece otherPiece = CurrentBoard.GetPiece(coord);
                 if (otherPiece != null) {
                     if (otherPiece.Empire == Empire) {
                         return possibleMoves;
                     }
-                    CanEat = true;
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
@@ -115,16 +112,15 @@ public abstract class Piece {
     protected List<Vector2Int> TopRightMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 8; i++) {
-                for (int j = Coordonee.y+1; j <=8; j++) {
+            for (int i = Coordonee.x+1; i <= 7; i++) {
+                for (int j = Coordonee.y+1; j <=7; j++) {
                     Vector2Int coord = new Vector2Int(Coordonee.x, Coordonee.y);
                     // Existing piece on current coord
-                    Piece otherPiece = Board.GetPiece(coord);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
                     if (otherPiece != null) {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
-                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
@@ -138,15 +134,14 @@ public abstract class Piece {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
             for (int i = Coordonee.x-1; i >= 0; i--) {
-                for (int j = Coordonee.y+1; j <=8; j++) {
+                for (int j = Coordonee.y+1; j <=7; j++) {
                     Vector2Int coord = new Vector2Int(Coordonee.x, Coordonee.y);
                     // Existing piece on current coord
-                    Piece otherPiece = Board.GetPiece(coord);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
                     if (otherPiece != null) {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
-                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
@@ -159,16 +154,15 @@ public abstract class Piece {
     protected List<Vector2Int> BottomRightMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 8; i++) {
+            for (int i = Coordonee.x+1; i <= 7; i++) {
                 for (int j = Coordonee.y-1; j >=0; j--) {
                     Vector2Int coord = new Vector2Int(Coordonee.x, Coordonee.y);
                     // Existing piece on current coord
-                    Piece otherPiece = Board.GetPiece(coord);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
                     if (otherPiece != null) {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
-                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
@@ -185,12 +179,11 @@ public abstract class Piece {
                 for (int j = Coordonee.y-1; j >= 0; j--) {
                     Vector2Int coord = new Vector2Int(Coordonee.x, Coordonee.y);
                     // Existing piece on current coord
-                    Piece otherPiece = Board.GetPiece(coord);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
                     if (otherPiece != null) {
                         if (otherPiece.Empire == Empire) {
                             return possibleMoves;
                         }
-                        CanEat = true;
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
