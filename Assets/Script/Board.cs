@@ -90,12 +90,7 @@ public class Board {
                clonedBoard.Pieces[0, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[0, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            
+           
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
                clonedBoard.Pieces[1, 0] = piece;
@@ -136,11 +131,7 @@ public class Board {
                clonedBoard.Pieces[1, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[1, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
+           
             
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
@@ -182,11 +173,7 @@ public class Board {
                clonedBoard.Pieces[2, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[2, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
+           
             
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
@@ -228,12 +215,8 @@ public class Board {
                clonedBoard.Pieces[3, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[3, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
             
+
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
                clonedBoard.Pieces[4, 0] = piece;
@@ -274,11 +257,7 @@ public class Board {
                clonedBoard.Pieces[4, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[4, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
+            
             
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
@@ -320,11 +299,7 @@ public class Board {
                clonedBoard.Pieces[5, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[5, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
+            
             
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
@@ -366,11 +341,7 @@ public class Board {
                clonedBoard.Pieces[6, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[6, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
+            
             
             foreach (Vector2Int vector2Int in piece.MovePossible()) {
                Board clonedBoard = Clone();
@@ -412,57 +383,7 @@ public class Board {
                clonedBoard.Pieces[7, 7] = piece;
                clonedBoard.GetPiece(vector2Int);
             }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[7, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
             
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 0] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 1] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 2] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 3] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 4] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 5] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 6] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 7] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
-            foreach (Vector2Int vector2Int in piece.MovePossible()) {
-               Board clonedBoard = Clone();
-               clonedBoard.Pieces[8, 8] = piece;
-               clonedBoard.GetPiece(vector2Int);
-            }
       }
       // Fin de récupération
          return boards;

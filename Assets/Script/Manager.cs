@@ -21,19 +21,45 @@ public class Manager : MonoBehaviour {
     public Sprite WhiteRook,WhiteKnight,WhiteBishop,WhiteQueen, WhiteKing, WhitePawn;
     public Sprite BlackRook, BlackKnight, BlackBishop, BlackQueen, BlackKing, BlackPawn;
     public Sprite Empty;
-    
-    public int NombreDeTours;
+
+    public bool hasMoved = false;
+    public Board NewBoard;
     [SerializeField] public static Board Board = new Board();
 
-    public void Start() {
+    public void Awake() {
         SquarePrefab.GetComponent<Image>().sprite = null;
         GenerateBoard();
         DisplayBoard();
-        Board.HeuristicSum(Empire.Black);
-        Board.HeuristicSum(Empire.White);
-        /*if (List<Vector2Int>GetChilds()){
-            MinMax(Board, 2, false);
+        /*if (List<Vector2Int>Board.GetChilds()){
+            MinMax(Board, 2, false, Empire.White);
         }*/
+    }
+
+    public void FixedUpdate() {
+        TeamBearing();
+    }
+
+    private void TeamBearing() {
+        Empire empire = Empire.White;
+        if (empire == Empire.Black) {
+            Board.HeuristicSum(Empire.Black);
+            Think( Board,2,false,Empire.Black);
+        }
+        if (empire == Empire.Black && hasMoved == true ) {
+            hasMoved = false;
+            empire = Empire.White;
+        }
+        
+        if (empire == Empire.White) {
+            Board.HeuristicSum(Empire.White);
+            Think( Board,2,false,Empire.White);
+        }
+        if (empire == Empire.White && hasMoved == true ) {
+            hasMoved = false;
+            empire = Empire.Black;
+        }
+        
+        
     }
 
     private void GenerateBoard() {
@@ -68,17 +94,18 @@ public class Manager : MonoBehaviour {
         }
     }
     
-    public void Think(Board board,int depth,Empire empire, bool maximizingPlayer) {
-        int oldValue = 0;
-        int value = 0;
-        if (maximizingPlayer) {
-            oldValue = int.MinValue;
-            oldValue = Mathf.Max(oldValue,MinMax(board, depth - 1,false, 
-                empire == Empire.White ? Empire.Black : Empire.White));
+    private void Think(Board board, int depth, bool maximizingPlayer, Empire currentEmpire) {
+        int oldValue = int.MinValue;
+        Board bestBoard = new Board();
+        foreach (Board child in Board.GetChilds()) {
+            int newValue = MinMax(child, 2, false, 
+                currentEmpire == Empire.White ? Empire.Black : Empire.White);
+            if (newValue > oldValue) {
+                oldValue = newValue;
+                bestBoard = child;
+            }
         }
-        if (oldValue > value) {
-            value = oldValue;
-        }
+        board = bestBoard;
     }
     
     // Pour chaque board possible je lance minmax
@@ -87,6 +114,7 @@ public class Manager : MonoBehaviour {
         int value = 0;
         if (depth == 0 ) {
             return board.HeuristicSum(currentEmpire);
+            hasMoved = true;
         }
         if (maximizingPlayer) {
             value = int.MinValue;
