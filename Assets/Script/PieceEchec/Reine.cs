@@ -10,23 +10,54 @@ public class Reine : Piece {
     
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
-        // Right Moves
-        possibleMoves.AddRange(RightMovesBlack);
-        // Left Moves
-        possibleMoves.AddRange(LeftMoves);
-        // Top Moves
-        possibleMoves.AddRange(TopMovesBlack);
-        // Bottom Moves
-        possibleMoves.AddRange(BottomMovesBlack);
-        // TopRight Moves
-        possibleMoves.AddRange(TopRightMoves);
-        // TopLeft Moves
-        possibleMoves.AddRange(TopLeftMoves);
-        // BottomLeft Moves
-        possibleMoves.AddRange(BottomLeftMoves);
-        // BottomRight Moves
-        possibleMoves.AddRange(BottomRightMoves);
+        if (Empire == Empire.Black)
+        {
+            // Right Moves
+            possibleMoves.AddRange(RightMovesBlack);
+            // Left Moves
+            possibleMoves.AddRange(LeftMovesBlack);
+            // Top Moves
+            possibleMoves.AddRange(TopMovesBlack);
+            // Bottom Moves
+            possibleMoves.AddRange(BottomMovesBlack);
+            // TopRight Moves
+            possibleMoves.AddRange(TopRightMovesBlack);
+            // TopLeft Moves
+            possibleMoves.AddRange(TopLeftMovesBlack);
+            // BottomLeft Moves
+            possibleMoves.AddRange(BottomLeftMovesBlack);
+            // BottomRight Moves
+            possibleMoves.AddRange(BottomRightMovesBlack);
+        }
+
+        if (Empire == Empire.White)
+        {
+            // Right Moves
+            possibleMoves.AddRange(RightMovesWhite);
+            // Left Moves
+            possibleMoves.AddRange(LeftMovesWhite);
+            // Top Moves
+            possibleMoves.AddRange(TopMovesWhite);
+            // Bottom Moves
+            possibleMoves.AddRange(BottomMovesWhite);
+            // TopRight Moves
+            possibleMoves.AddRange(TopRightMovesWhite);
+            // TopLeft Moves
+            possibleMoves.AddRange(TopLeftMovesWhite);
+            // BottomLeft Moves
+            possibleMoves.AddRange(BottomLeftMovesWhite);
+            // BottomRight Moves
+            possibleMoves.AddRange(BottomRightMovesWhite);
+        }
         
-        return possibleMoves;
+        List<Vector2Int> validMoves = new List<Vector2Int>();
+        foreach (Vector2Int possibleMove in possibleMoves) {
+            if (!CurrentBoard.ValidCoordinate(possibleMove)) continue;
+            Piece otherPiece = CurrentBoard.GetPiece(possibleMove);
+            if (otherPiece != null && otherPiece.Empire == Empire) continue;
+            validMoves.Add(possibleMove);
+        }
+        
+        return validMoves;
     }
 }

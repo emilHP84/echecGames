@@ -20,16 +20,16 @@ public class Board {
    public Piece GetPiece(Vector2Int coordinate) {
       if (coordinate.x < 0) return null;
       if (coordinate.y < 0) return null;
-      if (coordinate.x >= 8) return null;
-      if (coordinate.y >= 8) return null;
+      if (coordinate.x >= 7) return null;
+      if (coordinate.y >= 7) return null;
       return Pieces[coordinate.y, coordinate.x];
    }
 
    public bool ValidCoordinate(Vector2Int coordinate) {
       if (coordinate.x < 0) return false;
       if (coordinate.y < 0) return false;
-      if (coordinate.x >= 8) return false;
-      if (coordinate.y >= 8) return false;
+      if (coordinate.x >= 7) return false;
+      if (coordinate.y >= 7) return false;
       return true;
    }
    

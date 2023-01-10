@@ -10,6 +10,7 @@ public class Cavalier : Piece {
    
    public override List<Vector2Int> MovePossible() {
       List<Vector2Int> possibleMoves = new List<Vector2Int>();
+      
       // Listing Coordinates
       possibleMoves.Add(new Vector2Int(Coordonee.x + 1, Coordonee.y + 2));
       possibleMoves.Add(new Vector2Int(Coordonee.x + 1, Coordonee.y - 2));

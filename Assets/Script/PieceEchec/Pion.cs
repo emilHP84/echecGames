@@ -13,7 +13,7 @@ public class Pion : Piece {
 
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
-        if (Empire == Empire.White) {
+        if (Empire == Empire.Black) {
             possibleMoves.Add(TopCoord);
             if (hasMoved == false) {
                 possibleMoves.Add(TopTopCoord);
@@ -28,7 +28,7 @@ public class Pion : Piece {
             }
         }
 
-        if (Empire == Empire.Black) {
+        if (Empire == Empire.White) {
             possibleMoves.Add(BottomCoord);
             if (hasMoved == false) {
                 possibleMoves.Add(BottomBottomCoord);

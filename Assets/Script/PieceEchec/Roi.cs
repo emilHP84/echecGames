@@ -11,14 +11,14 @@ public class Roi : Piece {
    public override List<Vector2Int> MovePossible() {
       List<Vector2Int> possibleMoves = new List<Vector2Int>();
       
-      possibleMoves.Add(new Vector2Int(Coordonee.x + 1, Coordonee.y ));
-      possibleMoves.Add(new Vector2Int(Coordonee.x - 1, Coordonee.y ));
-      possibleMoves.Add(new Vector2Int(Coordonee.x , Coordonee.y + 1));
-      possibleMoves.Add(new Vector2Int(Coordonee.x , Coordonee.y - 1));
-      possibleMoves.Add(new Vector2Int(Coordonee.x - 1, Coordonee.y + 1));
-      possibleMoves.Add(new Vector2Int(Coordonee.x - 1, Coordonee.y - 1));
-      possibleMoves.Add(new Vector2Int(Coordonee.x + 1, Coordonee.y + 1));
-      possibleMoves.Add(new Vector2Int(Coordonee.x + 1, Coordonee.y - 1));
+      possibleMoves.Add(new Vector2Int(TopCoord.x, Coordonee.y ));
+      possibleMoves.Add(new Vector2Int(Bottom.x , Coordonee.y ));
+      possibleMoves.Add(new Vector2Int(Coordonee.x , RightCoord.y));
+      possibleMoves.Add(new Vector2Int(Coordonee.x , LeftCoord.y));
+      possibleMoves.Add(new Vector2Int(TopCoord.x, RightCoord.y));
+      possibleMoves.Add(new Vector2Int(TopCoord.x, LeftCoord.y));
+      possibleMoves.Add(new Vector2Int(Bottom.x, RightCoord.y));
+      possibleMoves.Add(new Vector2Int(Bottom.x, LeftCoord.y));
       
       List<Vector2Int> validMoves = new List<Vector2Int>();
       foreach (Vector2Int possibleMove in possibleMoves) {
