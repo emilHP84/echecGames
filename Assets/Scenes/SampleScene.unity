@@ -889,6 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d492453401b117428ec570594ee6781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Depth: 1
   BoardTransform: {fileID: 508681536}
   PieceTransform: {fileID: 711335173}
   SquarePrefab: {fileID: 8136873983171566624, guid: ab222842c27b7434d8a29dce51b3ce17, type: 3}

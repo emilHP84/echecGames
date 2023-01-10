@@ -11,13 +11,13 @@ public class Reine : Piece {
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
         // Right Moves
-        possibleMoves.AddRange(RightMoves);
+        possibleMoves.AddRange(RightMovesBlack);
         // Left Moves
         possibleMoves.AddRange(LeftMoves);
         // Top Moves
-        possibleMoves.AddRange(TopMoves);
+        possibleMoves.AddRange(TopMovesBlack);
         // Bottom Moves
-        possibleMoves.AddRange(BottomMoves);
+        possibleMoves.AddRange(BottomMovesBlack);
         // TopRight Moves
         possibleMoves.AddRange(TopRightMoves);
         // TopLeft Moves

@@ -10,16 +10,32 @@ public class Tour : Piece {
     
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
-        // Right Moves
-        possibleMoves.AddRange(RightMoves);
-        // Left Moves
-        possibleMoves.AddRange(LeftMoves);
-        // Top Moves
-        possibleMoves.AddRange(TopMoves);
-        // Bottom Moves
-        possibleMoves.AddRange(BottomMoves);
-        
-        return possibleMoves;
+        if (Empire == Empire.Black) {
+            // Right Moves
+            //possibleMoves.AddRange(RightMovesBlack);
+            // Left Moves
+            //possibleMoves.AddRange(LeftMoves);
+            // Top Moves
+            //possibleMoves.AddRange(TopMovesBlack);
+            // Bottom Moves
+            //possibleMoves.AddRange(BottomMovesBlack);
+
+            return possibleMoves;
+        }
+        if (Empire == Empire.White) {
+            // Right Moves
+            //possibleMoves.AddRange(RightMovesWhite);
+            // Left Moves
+            //possibleMoves.AddRange(LeftMoves);
+            // Top Moves
+            //possibleMoves.AddRange(TopMovesWhite);
+            // Bottom Moves
+            //possibleMoves.AddRange(BottomMovesWhite);
+
+            return possibleMoves;
+        }
+
+        return MovePossible();
     }
     
 }

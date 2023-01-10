@@ -30,7 +30,8 @@ public class Manager : MonoBehaviour {
     
     public void Awake() {
         SquarePrefab.GetComponent<Image>().sprite = null;
-        GenerateBoard();
+        //GenerateBoard();
+        GenerateBoardTest();
         DisplayBoard(CurrentBoard);
     }
 
@@ -45,7 +46,7 @@ public class Manager : MonoBehaviour {
         }
     }
 
-    private void GenerateBoard() {
+    /*private void GenerateBoard() {
         CurrentBoard = new Board(){
             Pieces = new Piece[,] {
                 { new Tour(Empire.Black,5,0), new Cavalier(Empire.Black,3,0), new Fou(Empire.Black,5,0), new Reine(Empire.Black,10,0), new Roi(Empire.Black,2000,0), new Fou(Empire.Black,5,0), new Cavalier(Empire.Black,3,0), new Tour(Empire.Black,5,0) },
@@ -56,6 +57,22 @@ public class Manager : MonoBehaviour {
                 { null, null, null, null, null, null, null, null,  },
                 { new Pion(Empire.White,1,0), new Pion(Empire.White,1,0),new Pion(Empire.White,1,0),new Pion(Empire.White,1,0),new Pion(Empire.White,1,0),new Pion(Empire.White,1,0),new Pion(Empire.White,1,0),new Pion(Empire.White,1,0),},
                 { new Tour(Empire.White,5,0), new Cavalier(Empire.White,3,0), new Fou(Empire.White,5,0), new Reine(Empire.White,10,0), new Roi(Empire.White,2000,0), new Fou(Empire.White,5,0), new Cavalier(Empire.White,3,0), new Tour(Empire.White,5,0) },
+            },
+            EmpireTurn = Empire.White
+        };
+    }*/
+    private void GenerateBoardTest() {
+        CurrentBoard = new Board(){
+            Pieces = new Piece[,] {
+                               
+                { null, null, null, null, null, null, null, null,  },
+                { null, null, null, new Tour(Empire.White,5,0), null, null, null, null,  },
+                { null, null, null, null, null, null, null, null,  },
+                { null, null, null, null, null, null, null, null,  },
+                { null, null, null, null, null, null, null, null,  },
+                { null, null, null, null, null, null, null, null,  },
+                { null, null, null, new Tour(Empire.Black,5,0), null, null, null, null,  },
+                { null, null, null, null, null, null, null, null,  },
             },
             EmpireTurn = Empire.White
         };
