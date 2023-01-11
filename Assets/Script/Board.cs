@@ -20,16 +20,16 @@ public class Board {
    public Piece GetPiece(Vector2Int coordinate) {
       if (coordinate.x < 0) return null;
       if (coordinate.y < 0) return null;
-      if (coordinate.x >= 7) return null;
-      if (coordinate.y >= 7) return null;
-      return Pieces[coordinate.y, coordinate.x];
+      if (coordinate.x > 7) return null;
+      if (coordinate.y > 7) return null;
+      return Pieces[coordinate.x, coordinate.y];
    }
 
    public bool ValidCoordinate(Vector2Int coordinate) {
       if (coordinate.x < 0) return false;
       if (coordinate.y < 0) return false;
-      if (coordinate.x >= 7) return false;
-      if (coordinate.y >= 7) return false;
+      if (coordinate.x > 7) return false;
+      if (coordinate.y > 7) return false;
       return true;
    }
    
@@ -66,6 +66,8 @@ public class Board {
                // Cloner le board actuel
                Board clonedBoard = Clone();
                // Déplacer la piece vers son mouvement possible
+               if (vector2Int.x < 0 || vector2Int.x > 7 || vector2Int.y < 0 || vector2Int.y > 7)
+                  Debug.Log(piece.GetType().Name + " with " + vector2Int.x + " " + vector2Int.y + " coordinate");
                //Debug.Log(vector2Int.x + " " + vector2Int.y);
                clonedBoard.Pieces[vector2Int.x, vector2Int.y] = piece;
                // Vider ancienne position

@@ -13,45 +13,82 @@ public class Pion : Piece {
 
     public override List<Vector2Int> MovePossible() {
         List<Vector2Int> possibleMoves = new List<Vector2Int>();
-        if (Empire == Empire.Black) {
-            possibleMoves.Add(TopCoord);
-            if (hasMoved == false) {
-                possibleMoves.Add(TopTopCoord);
-            }
-            Piece otherPiece = CurrentBoard.GetPiece(TopRightCoord);
-            if (otherPiece != null && otherPiece.Empire != Empire) {
-                possibleMoves.Add(TopRightCoord);
-            }
-            otherPiece = CurrentBoard.GetPiece(TopLeftCoord);
-            if (otherPiece != null && otherPiece.Empire != Empire) {
-                possibleMoves.Add(TopLeftCoord);
-            }
-        }
-
         if (Empire == Empire.White) {
-            possibleMoves.Add(BottomCoord);
-            if (hasMoved == false) {
-                possibleMoves.Add(BottomBottomCoord);
+            // Forward Move
+            if (CurrentBoard.ValidCoordinate(TopCoord)) {
+                Piece topPiece = CurrentBoard.GetPiece(TopCoord);
+                if (topPiece == null) possibleMoves.Add(TopCoord);
+                if (topPiece != null && topPiece.Empire == Empire) {
+                    return possibleMoves;
+                }
+                if (topPiece != null && topPiece.Empire != Empire) {
+                    return possibleMoves;
+                }
+                return possibleMoves;
             }
-            Piece otherPiece = CurrentBoard.GetPiece(BottomRightCoord);
-            if (otherPiece != null && otherPiece.Empire != Empire) {
-                possibleMoves.Add(BottomRightCoord);
+            
+            // Forward Double Move
+            if (CurrentBoard.ValidCoordinate(TopTopCoord)) {
+                Piece topPiece = CurrentBoard.GetPiece(TopCoord);
+                Piece topTopPiece = CurrentBoard.GetPiece(TopTopCoord);
+                if (topPiece == null && topTopPiece == null && hasMoved == false) possibleMoves.Add(TopTopCoord);
+                return possibleMoves;
             }
-            otherPiece = CurrentBoard.GetPiece(BottomLeftCoord);
-            if (otherPiece != null && otherPiece.Empire != Empire) {
-                possibleMoves.Add(BottomLeftCoord);
+            // Eat Forward Right
+
+            if (CurrentBoard.ValidCoordinate(TopRightCoord)) {
+                Piece otherPiece = CurrentBoard.GetPiece(TopRightCoord);
+                if (otherPiece != null && otherPiece.Empire != Empire) {
+                    possibleMoves.Add(TopRightCoord);
+                }
+                return possibleMoves;
             }
+
+            // Eat Forward Left
+            if (CurrentBoard.ValidCoordinate(TopLeftCoord)) {
+                Piece otherPiece = CurrentBoard.GetPiece(TopLeftCoord);
+                if (otherPiece != null && otherPiece.Empire != Empire) {
+                    possibleMoves.Add(TopLeftCoord);
+                }
+                return possibleMoves;
+            }
+            return possibleMoves;
         }
-        
-        List<Vector2Int> validMoves = new List<Vector2Int>();
-        foreach (Vector2Int possibleMove in possibleMoves) {
-            if (!CurrentBoard.ValidCoordinate(possibleMove)) continue;
-            Piece otherPiece = CurrentBoard.GetPiece(possibleMove);
-            if (otherPiece != null && otherPiece.Empire == Empire) continue;
-            validMoves.Add(possibleMove);
+        if (Empire == Empire.Black) {
+            // Forward Move
+            if (CurrentBoard.ValidCoordinate(BottomCoord)) {
+                Piece topPiece = CurrentBoard.GetPiece(BottomCoord);
+                if (topPiece == null) possibleMoves.Add(BottomCoord);
+                return possibleMoves;
+            }
+            // Forward Double Move
+            if (CurrentBoard.ValidCoordinate(BottomBottomCoord)) {
+                Piece topPiece = CurrentBoard.GetPiece(BottomCoord);
+                Piece topTopPiece = CurrentBoard.GetPiece(BottomBottomCoord);
+                if (topPiece == null && topTopPiece == null && hasMoved == false) possibleMoves.Add(TopTopCoord);
+                return possibleMoves;
+            }
+            // Eat Forward Right
+
+            if (CurrentBoard.ValidCoordinate(BottomRightCoord)) {
+                Piece otherPiece = CurrentBoard.GetPiece(BottomRightCoord);
+                if (otherPiece != null && otherPiece.Empire != Empire) {
+                    possibleMoves.Add(BottomRightCoord);
+                }
+                return possibleMoves;
+            }
+
+            // Eat Forward Left
+            if (CurrentBoard.ValidCoordinate(BottomLeftCoord)) {
+                Piece otherPiece = CurrentBoard.GetPiece(BottomLeftCoord);
+                if (otherPiece != null && otherPiece.Empire != Empire) {
+                    possibleMoves.Add(BottomLeftCoord);
+                }
+                return possibleMoves;
+            }
+            return possibleMoves;
         }
-        
-        return validMoves;
+        return possibleMoves;
     }
     
 }

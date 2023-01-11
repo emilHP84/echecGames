@@ -62,22 +62,22 @@ public class Manager : MonoBehaviour {
         };
     }
     
-    /*private void GenerateBoardTest() {
+    private void GenerateBoardTest() {
         CurrentBoard = new Board(){
             Pieces = new Piece[,] {
                                
                 { null, null, null, null, null, null, null, null,  },
-                { null, null, null, new Pion(Empire.White,5,0), null, null, null, null,  },
+                { null, null, null, new Cavalier(Empire.White,5,0), null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null ,null, null, null, null, null,  },
-                { null, null, null, null,new Tour(Empire.Black,5,0), null, null, null,  },
+                { null, null, null, null,new Cavalier(Empire.Black,5,0), null, null, null,  },
             },
             EmpireTurn = Empire.White
         };
-    }*/
+    }
     
     public void DisplayBoard(Board board) {
         board = CurrentBoard;

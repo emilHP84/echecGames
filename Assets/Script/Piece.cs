@@ -16,347 +16,313 @@ public abstract class Piece {
     public Vector2Int Coordonee => CurrentBoard.CoordinateOf(this);
     
 
-    protected Vector2Int Top => new Vector2Int(-1, 0);
+    protected Vector2Int Top => new Vector2Int(1, 0);
     protected Vector2Int TopCoord => Coordonee + Top;
-    protected Vector2Int TopTopCoord => Coordonee + new Vector2Int(-2, 0);
+    protected Vector2Int TopTopCoord => new Vector2Int(-2, 0);
     
-    protected Vector2Int Right => new Vector2Int(0, +1);
+    protected Vector2Int Right => new Vector2Int(0, 1);
     protected Vector2Int RightCoord => Coordonee + Right;
+    protected Vector2Int RightRightCoord => new Vector2Int(0, 2);
 
-    protected Vector2Int Bottom => new Vector2Int(+1, 0);
+    protected Vector2Int Bottom => new Vector2Int(-1, 0);
     protected Vector2Int BottomCoord => Coordonee + Bottom;
-    protected Vector2Int BottomBottomCoord => Coordonee + new Vector2Int(2, 0);
+    protected Vector2Int BottomBottomCoord =>new Vector2Int(2, 0);
 
     protected Vector2Int Left => new Vector2Int(0, -1);
     protected Vector2Int LeftCoord => Coordonee + Left;
+    protected Vector2Int leftLeftCoord => new Vector2Int(0, -2);
     
     protected Vector2Int TopRightCoord => Coordonee + Top + Right;
     protected Vector2Int BottomRightCoord => Coordonee + Bottom + Right;
     protected Vector2Int BottomLeftCoord => Coordonee + Bottom + Left;
     protected Vector2Int TopLeftCoord => Coordonee + Top + Left;
     
-    protected List<Vector2Int> TopMovesBlack {
+    protected Vector2Int TopRightCoordC => Coordonee + TopTopCoord + Right;
+    protected Vector2Int BottomRightCoordC => Coordonee + BottomBottomCoord + Right;
+    protected Vector2Int BottomLeftCoordC => Coordonee + BottomBottomCoord + Left;
+    protected Vector2Int TopLeftCoordC => Coordonee + TopTopCoord + Left;
+    protected Vector2Int RightTopCoordC => Coordonee + Top + RightRightCoord;
+    protected Vector2Int RightBottomCoordC => Coordonee + Bottom + RightRightCoord;
+    protected Vector2Int LeftBottomCoordC => Coordonee + Bottom + leftLeftCoord;
+    protected Vector2Int LeftTopCoordC => Coordonee + Top + leftLeftCoord;
+    
+    protected List<Vector2Int> TopMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x + 1; i <= 7; i++) {
-                Vector2Int coord = new Vector2Int(TopCoord.x, Coordonee.y);
-                // Existing piece on current coord
+            for (int i = Coordonee.x - 1; i >= 0; i--) {
+                Vector2Int coord = new Vector2Int(i, Coordonee.y);
                 Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
-                        return possibleMoves;
-                    }
+                if (otherPiece == null) possibleMoves.Add(coord);
+                if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                if (otherPiece != null && otherPiece.Empire != Empire) {
                     possibleMoves.Add(coord);
                     return possibleMoves;
                 }
-                possibleMoves.Add(coord);
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> TopMovesWhite {
+    protected List<Vector2Int> RightMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x + 1; i <= 7; i++) {
-                Vector2Int coord = new Vector2Int(BottomCoord.x, Coordonee.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
+            for (int i = 1; i <= 7; i++) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x, Coordonee.y + i))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x, Coordonee.y + i);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
                 }
-                possibleMoves.Add(coord);
-                return possibleMoves;
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> RightMovesBlack {
+    protected List<Vector2Int> BottomMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.y+1; i <= 7; i++) {
-                Vector2Int coord = new Vector2Int(Coordonee.x, RightCoord.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
+            for (int i = 1; i == 0; i--) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + i , 0 ))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + i, Coordonee.y);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
-                    return possibleMoves;
                 }
-                possibleMoves.Add(coord);
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> RightMovesWhite {
+    protected List<Vector2Int> LeftMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.y+1; i <= 7; i++) {
-                Vector2Int coord = new Vector2Int(Coordonee.x, LeftCoord.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
+            for (int i = 1; i >= 0; i--) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(0, Coordonee.y - i))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x, Coordonee.y - i);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
-                    return possibleMoves;
                 }
-                possibleMoves.Add(coord);
+            }
+
+            return possibleMoves;
+        }
+    }
+
+    protected List<Vector2Int> TopRightMoves {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            for (int i = 1; i <= 7; i++) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x - i, Coordonee.y + i))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x - i, Coordonee.y + i);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+                }
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> BottomMovesBlack {
+    protected List<Vector2Int> TopLeftMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i >= 0; i--) {
-                Vector2Int coord = new Vector2Int(BottomCoord.x,Coordonee.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
+            for (int i = 1 ; i >= 0; i--) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x - i, Coordonee.y - i))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x - i, Coordonee.y - i);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
-                    return possibleMoves;
                 }
-                possibleMoves.Add(coord);
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> BottomMovesWhite {
+    protected List<Vector2Int> BottomRightMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i >= 0; i--) {
-                Vector2Int coord = new Vector2Int(TopCoord.x,Coordonee.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
+            for (int i = 1; i <= 7; i++) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + i, Coordonee.y + i))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + i, Coordonee.y + i);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
-                    return possibleMoves;
                 }
-                possibleMoves.Add(coord);
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> LeftMovesBlack {
+    protected List<Vector2Int> BottomLeftMoves {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.y+1; i >= 0; i--) {
-                Vector2Int coord = new Vector2Int(Coordonee.x, LeftCoord.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
+            for (int i = 1; i >= 0; i--) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + i, Coordonee.y - i))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + i, Coordonee.y - i);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
-                    return possibleMoves;
                 }
-                possibleMoves.Add(coord);
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> LeftMovesWhite {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.y+1; i >= 0; i--) {
-                Vector2Int coord = new Vector2Int(Coordonee.x, RightCoord.y);
-                // Existing piece on current coord
-                Piece otherPiece = CurrentBoard.GetPiece(coord);
-                if (otherPiece != null) {
-                    if (otherPiece.Empire == Empire) {
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                    return possibleMoves;
-                }
-                possibleMoves.Add(coord);
             }
             return possibleMoves;
         }
     }
     
-    
-    protected List<Vector2Int> TopRightMovesBlack {
+    protected List<Vector2Int> TopRightMovesCavalier {
         get {
             List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 7; i++) {
-                for (int j = Coordonee.y+1; j <=7; j++) {
-                    Vector2Int coord = new Vector2Int(TopCoord.x,RightCoord.y);
-                    // Existing piece on current coord
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x - 2, Coordonee.y + 1))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x - 2, Coordonee.y + 1);
                     Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
                         possibleMoves.Add(coord);
                         return possibleMoves;
                     }
-                    possibleMoves.Add(coord);
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> TopLeftMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x - 2, Coordonee.y - 1))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x - 2, Coordonee.y - 1);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> BottomRightMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + 2, Coordonee.y + 1))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + 2, Coordonee.y + 1);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> BottomLeftMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + 2, Coordonee.y - 1))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + 2, Coordonee.y - 1);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> RightTopMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x - 1, Coordonee.y + 2))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x - 1, Coordonee.y + 2);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> LeftTopMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x - 1, Coordonee.y - 2))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x - 1, Coordonee.y - 2);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> RightBottomMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + 1, Coordonee.y + 2))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + 1, Coordonee.y + 2);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
+            }
+            return possibleMoves;
+        }
+    }
+    protected List<Vector2Int> LeftBottomMovesCavalier {
+        get {
+            List<Vector2Int> possibleMoves = new List<Vector2Int>();
+            for (int i = 1; i >= 0; i--) {
+                if (CurrentBoard.ValidCoordinate(new Vector2Int(Coordonee.x + 1, Coordonee.y - 2))) {
+                    Vector2Int coord = new Vector2Int(Coordonee.x + 1, Coordonee.y - 2);
+                    Piece otherPiece = CurrentBoard.GetPiece(coord);
+                    if (otherPiece == null) possibleMoves.Add(coord);
+                    if (otherPiece != null && otherPiece.Empire == Empire) return possibleMoves;
+                    if (otherPiece != null && otherPiece.Empire != Empire) {
+                        possibleMoves.Add(coord);
+                        return possibleMoves;
+                    }
                 }
             }
             return possibleMoves;
         }
     }
-    protected List<Vector2Int> TopRightMovesWhite {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 7; i++) {
-                for (int j = Coordonee.y+1; j <=7; j++) {
-                    Vector2Int coord = new Vector2Int(BottomCoord.x,LeftCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> TopLeftMovesBlack {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x-1; i >= 0; i--) {
-                for (int j = Coordonee.y+1; j <=7; j++) {
-                    Vector2Int coord = new Vector2Int(TopCoord.x, LeftCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> TopLeftMovesWhite {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x-1; i >= 0; i--) {
-                for (int j = Coordonee.y+1; j <=7; j++) {
-                    Vector2Int coord = new Vector2Int(BottomCoord.x, RightCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> BottomRightMovesBlack {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 7; i++) {
-                for (int j = Coordonee.y-1; j >=0; j--) {
-                    Vector2Int coord = new Vector2Int(BottomCoord.x, RightCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> BottomRightMovesWhite {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x+1; i <= 7; i++) {
-                for (int j = Coordonee.y-1; j >=0; j--) {
-                    Vector2Int coord = new Vector2Int(TopCoord.x, LeftCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> BottomLeftMovesBlack {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x-1; i >= 0; i--) {
-                for (int j = Coordonee.y-1; j >= 0; j--) {
-                    Vector2Int coord = new Vector2Int(BottomCoord.x, LeftCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
-    protected List<Vector2Int> BottomLeftMovesWhite {
-        get {
-            List<Vector2Int> possibleMoves = new List<Vector2Int>();
-            for (int i = Coordonee.x-1; i >= 0; i--) {
-                for (int j = Coordonee.y-1; j >= 0; j--) {
-                    Vector2Int coord = new Vector2Int(TopCoord.x, RightCoord.y);
-                    // Existing piece on current coord
-                    Piece otherPiece = CurrentBoard.GetPiece(coord);
-                    if (otherPiece != null) {
-                        if (otherPiece.Empire == Empire) {
-                            return possibleMoves;
-                        }
-                        possibleMoves.Add(coord);
-                        return possibleMoves;
-                    }
-                    possibleMoves.Add(coord);
-                }
-            }
-            return possibleMoves;
-        }
-    }
+
+
     protected Piece(Empire empire) {
         Empire = empire;
     }

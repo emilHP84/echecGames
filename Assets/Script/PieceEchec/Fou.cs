@@ -13,35 +13,29 @@ public class Fou : Piece {
         if (Empire == Empire.White)
         {
             // TopRight Moves
-            possibleMoves.AddRange(TopRightMovesWhite);
+            possibleMoves.AddRange(TopRightMoves);
             // TopLeft Moves
-            possibleMoves.AddRange(TopLeftMovesWhite);
+            possibleMoves.AddRange(TopLeftMoves);
             // BottomLeft Moves
-            possibleMoves.AddRange(BottomLeftMovesWhite);
+            possibleMoves.AddRange(BottomLeftMoves);
             // BottomRight Moves
-            possibleMoves.AddRange(BottomRightMovesWhite);
+            possibleMoves.AddRange(BottomRightMoves);
         }
 
         if (Empire == Empire.Black)
         {
             // TopRight Moves
-            possibleMoves.AddRange(TopRightMovesBlack);
+            possibleMoves.AddRange(TopRightMoves);
             // TopLeft Moves
-            possibleMoves.AddRange(TopLeftMovesBlack);
+            possibleMoves.AddRange(TopLeftMoves);
             // BottomLeft Moves
-            possibleMoves.AddRange(BottomLeftMovesBlack);
+            possibleMoves.AddRange(BottomLeftMoves);
             // BottomRight Moves
-            possibleMoves.AddRange(BottomRightMovesBlack);
+            possibleMoves.AddRange(BottomRightMoves);
         }
 
-        List<Vector2Int> validMoves = new List<Vector2Int>();
-        foreach (Vector2Int possibleMove in possibleMoves) {
-            if (!CurrentBoard.ValidCoordinate(possibleMove)) continue;
-            Piece otherPiece = CurrentBoard.GetPiece(possibleMove);
-            if (otherPiece != null && otherPiece.Empire == Empire) continue;
-            validMoves.Add(possibleMove);
-        }
         
-        return validMoves;
+        
+        return possibleMoves;
     }
 }

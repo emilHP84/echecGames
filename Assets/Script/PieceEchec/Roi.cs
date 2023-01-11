@@ -22,10 +22,11 @@ public class Roi : Piece {
       
       List<Vector2Int> validMoves = new List<Vector2Int>();
       foreach (Vector2Int possibleMove in possibleMoves) {
-         if (!CurrentBoard.ValidCoordinate(possibleMove)) continue;
-         Piece piece = CurrentBoard.GetPiece(possibleMove);
-         if (piece != null && piece.Empire == Empire) continue;
-         validMoves.Add(possibleMove);
+         if (!CurrentBoard.ValidCoordinate(possibleMove)) {
+            Piece piece = CurrentBoard.GetPiece(possibleMove);
+            if (piece != null && piece.Empire == Empire) return possibleMoves;
+            if (piece != null && piece.Empire != Empire) validMoves.Add(possibleMove);
+         }
       }
       return validMoves;
    }
