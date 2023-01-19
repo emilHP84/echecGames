@@ -40,6 +40,7 @@ public class Pion : Piece {
                 Piece otherPiece = CurrentBoard.GetPiece(TopRightCoord);
                 if (otherPiece != null && otherPiece.Empire != Empire) {
                     possibleMoves.Add(TopRightCoord);
+                    return possibleMoves;
                 }
                 return possibleMoves;
             }
@@ -49,11 +50,14 @@ public class Pion : Piece {
                 Piece otherPiece = CurrentBoard.GetPiece(TopLeftCoord);
                 if (otherPiece != null && otherPiece.Empire != Empire) {
                     possibleMoves.Add(TopLeftCoord);
+                    return possibleMoves;
                 }
                 return possibleMoves;
             }
             return possibleMoves;
         }
+        
+        
         if (Empire == Empire.Black) {
             // Forward Move
             if (CurrentBoard.ValidCoordinate(BottomCoord)) {
@@ -74,6 +78,7 @@ public class Pion : Piece {
                 Piece otherPiece = CurrentBoard.GetPiece(BottomRightCoord);
                 if (otherPiece != null && otherPiece.Empire != Empire) {
                     possibleMoves.Add(BottomRightCoord);
+                    return possibleMoves;
                 }
                 return possibleMoves;
             }
@@ -83,6 +88,7 @@ public class Pion : Piece {
                 Piece otherPiece = CurrentBoard.GetPiece(BottomLeftCoord);
                 if (otherPiece != null && otherPiece.Empire != Empire) {
                     possibleMoves.Add(BottomLeftCoord);
+                    return possibleMoves;
                 }
                 return possibleMoves;
             }

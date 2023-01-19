@@ -19,6 +19,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(TopRightCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -30,6 +31,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(BottomRightCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -41,6 +43,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(BottomLeftCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -52,6 +55,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(TopLeftCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -63,6 +67,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(RightTopCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -74,6 +79,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(RightBottomCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -85,6 +91,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(LeftBottomCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -96,6 +103,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(LeftTopCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -110,6 +118,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(TopRightCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -121,6 +130,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(BottomRightCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -132,6 +142,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(BottomLeftCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -143,6 +154,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(TopLeftCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -154,6 +166,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(RightTopCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -165,6 +178,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(RightBottomCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -176,6 +190,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(LeftBottomCoordC);
                return possibleMoves;
             }
             return possibleMoves;
@@ -187,6 +202,7 @@ public class Cavalier : Piece {
                return possibleMoves;
             }
             if (topPiece != null && topPiece.Empire != Empire) {
+               possibleMoves.Add(LeftTopCoordC);
                return possibleMoves;
             }
             return possibleMoves;

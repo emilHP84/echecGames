@@ -5,13 +5,6 @@ using System;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-//https://fr.wikipedia.org/wiki/Algorithme_minimax
-//https://fr.wikipedia.org/wiki/%C3%89lagage_alpha-b%C3%AAta
-//https://www.developpez.net/forums/d1014691/general-developpement/algorithme-mathematiques/intelligence-artificielle/fonction-d-evaluation-minmax-aux-echecs/
-//https://forums.commentcamarche.net/forum/affich-20210445-fonction-d-evaluation-de-minmax
-//https://openclassrooms.com/forum/sujet/fonction-evaluation-echec-72339
-
-//https://pageperso.lis-lab.fr/~liva.ralaivola/teachings20062005/reversi/MinMaxL2.pdf
 
 public class Manager : MonoBehaviour {
 
@@ -44,6 +37,11 @@ public class Manager : MonoBehaviour {
             _stopwatch.Stop();
             Debug.Log(_stopwatch.Elapsed);
         }
+
+        if (Input.GetButtonDown("Fire1")) {
+            GenerateBoard();
+            DisplayBoard(CurrentBoard);
+        }
     }
 
     private void GenerateBoard() {
@@ -67,13 +65,13 @@ public class Manager : MonoBehaviour {
             Pieces = new Piece[,] {
                                
                 { null, null, null, null, null, null, null, null,  },
-                { null, null, null, new Cavalier(Empire.White,5,0), null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
                 { null, null, null, null, null, null, null, null,  },
-                { null, null, null ,null, null, null, null, null,  },
-                { null, null, null, null,new Cavalier(Empire.Black,5,0), null, null, null,  },
+                { null, null, null, null, null, null, null, null,  },
+                { null, null, new Pion(Empire.White,1,0) ,null, new Pion(Empire.White,1,0), null, null, null,  },
+                { null, null, null, null,new Tour(Empire.Black,5,0), null, null, null,  },
             },
             EmpireTurn = Empire.White
         };
